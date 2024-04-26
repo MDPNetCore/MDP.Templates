@@ -1,29 +1,17 @@
-﻿@using MyLab.Todos
+﻿@using MyLab.Module
 
 @page "/InteropExample"
 @code {
 
     // Fields
     [Inject]
-    public TodoContext _todoContext { get; set; }
+    public WorkContext _workContext { get; set; }
 
 
     // Methods
     private object CreatePageData()
     {
-        // Add
-        _todoContext.TodoRepository.Add(new Todo()
-        {
-            TodoId = MDP.Domain.Identifier.NewId(),
-            Title = "Hello World",
-            IsCompleted = true,
-        });
-
-        // FindAll
-        var todoList = _todoContext.TodoRepository.FindAll();
-        if (todoList == null) throw new InvalidOperationException($"{nameof(todoList)}=null");
-
-        return todoList.FirstOrDefault();
+        return new { a = "123", b = _workContext.GetValue() };
     }
 }
 
@@ -42,7 +30,7 @@
 
                 // invokeMethod
                 mdp.blazor.interopManager.invokeMethodAsync(
-                    pageData.Title
+                    pageData.b
                 ).then(result => {
                     alert(result);
                 }).catch(error => {
@@ -56,9 +44,14 @@
     </script>
 </PageScript>
 
+
+<!-- title -->
 <h3>InteropExample</h3>
-<button class="btn btn-primary" id="runDotNetButton">Run .NET</button>
+<hr />
+
+<!-- Interop -->
+<button class="btn btn-primary" id="runDotNetButton">Run .NET</button><br />
 <br />
+
+<p id="message"></p><br />
 <br />
-<br />
-<p id="message"></p>

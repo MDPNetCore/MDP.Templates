@@ -1,30 +1,17 @@
-﻿@using MyLab.Todos
+﻿@using MyLab.Module
 
 @page "/ScriptExample"
 @code {
 
     // Fields
     [Inject]
-    public TodoContext _todoContext { get; set; }
+    public WorkContext _workContext { get; set; }
 
 
     // Methods
     private object CreatePageData()
     {
-        // Add
-        _todoContext.TodoRepository.Add(new Todo()
-        {
-            TodoId = MDP.Domain.Identifier.NewId(),
-            Title = "Hello World",
-            IsCompleted = true,
-        });
-
-        // FindAll
-        var todoList = _todoContext.TodoRepository.FindAll();
-        if (todoList == null) throw new InvalidOperationException($"{nameof(todoList)}=null");
-
-        // Return
-        return todoList.FirstOrDefault();
+        return new { a = "123", b = _workContext.GetValue() };
     }
 }
 
@@ -42,7 +29,7 @@
             document.getElementById("runScriptButton").addEventListener("click", function (event) {
 
                 // alert
-                alert(pageData.Title);
+                alert(pageData.b);
             });
 
             // message
@@ -51,9 +38,14 @@
     </script>
 </PageScript>
 
-<h3 id="cccc">ScriptExample</h3>
-<button class="btn btn-primary" id="runScriptButton">Run Script</button>
+
+<!-- title -->
+<h3>ScriptExample</h3>
+<hr />
+
+<!-- Script -->
+<button class="btn btn-primary" id="runScriptButton">Run Script</button><br />
 <br />
+
+<p id="message"></p><br />
 <br />
-<br />
-<p id="message"></p>
