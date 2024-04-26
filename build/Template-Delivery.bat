@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 
 :: ================================================
 :: Variables
-set version=6.1.13
+set version=8.0.2
 
 set buildDir=%~dp0
 set srcDir=%~dp0..\templates
