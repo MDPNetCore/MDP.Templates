@@ -7,7 +7,7 @@ setlocal enabledelayedexpansion
 set version=8.0.2
 
 set buildDir=%~dp0
-set srcDir=%~dp0..\templates
+set srcDir=%~dp0..\src
 set outputDir=%~dp0packed
 
 
