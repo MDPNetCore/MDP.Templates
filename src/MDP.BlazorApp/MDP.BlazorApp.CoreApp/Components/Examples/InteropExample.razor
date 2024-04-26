@@ -41,7 +41,7 @@
             document.getElementById("runDotNetButton").addEventListener("click", function (event) {
 
                 // invokeMethod
-                mdp.blazor.interopInvoker.invokeMethodAsync(
+                mdp.blazor.interopManager.invokeMethodAsync(
                     pageData.Title
                 ).then(result => {
                     alert(result);
